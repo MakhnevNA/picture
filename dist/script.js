@@ -90,10 +90,122 @@
 /*!************************!*\
   !*** ./src/js/main.js ***!
   \************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _modules_modals__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/modals */ "./src/js/modules/modals.js");
+
+document.addEventListener('DOMContentLoaded', () => {
+  'use strict';
+
+  Object(_modules_modals__WEBPACK_IMPORTED_MODULE_0__["default"])();
+});
+
+/***/ }),
+
+/***/ "./src/js/modules/calcScroll.js":
+/*!**************************************!*\
+  !*** ./src/js/modules/calcScroll.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const calcScroll = () => {
+  let div = document.createElement('div');
+  div.style.width = '50px';
+  div.style.height = '50px';
+  div.style.overflowY = 'scroll';
+  div.style.visibility = 'hidden';
+  document.body.appendChild(div);
+  let scrollWidth = div.offsetWidth - div.clientWidth;
+  div.remove();
+  return scrollWidth;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (calcScroll);
+
+/***/ }),
+
+/***/ "./src/js/modules/modals.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/modals.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _calcScroll__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./calcScroll */ "./src/js/modules/calcScroll.js");
 
 
+const modals = () => {
+  const bindModal = (triggerSelector, modalSelector, closeSelector, closeClickOverlay = true) => {
+    const trigger = document.querySelectorAll(triggerSelector),
+          modal = document.querySelector(modalSelector),
+          close = document.querySelector(closeSelector),
+          windows = document.querySelectorAll('[data-modal]'),
+          scroll = Object(_calcScroll__WEBPACK_IMPORTED_MODULE_0__["default"])();
+    trigger.forEach(item => {
+      item.addEventListener('click', e => {
+        if (e.target) {
+          e.preventDefault();
+        }
+
+        windows.forEach(item => {
+          item.style.display = 'none';
+        });
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        document.body.style.marginRight = `${scroll}px`;
+      });
+    });
+    modal.addEventListener('click', e => {
+      if (e.target === modal && closeClickOverlay) {
+        windows.forEach(item => {
+          item.style.display = 'none';
+        });
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+        document.body.style.marginRight = `0px`;
+      }
+    });
+    close.addEventListener('click', () => {
+      windows.forEach(item => {
+        item.style.display = 'none';
+      });
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+      document.body.style.marginRight = `0px`;
+    });
+  };
+
+  function showModalByTime(selector, time) {
+    setTimeout(() => {
+      let display;
+      document.querySelectorAll('[data-modal]').forEach(item => {
+        if (getComputedStyle(item).display !== 'none') {
+          display = 'block';
+        }
+      });
+
+      if (!display) {
+        document.querySelector(selector).style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        document.body.style.marginRight = `${Object(_calcScroll__WEBPACK_IMPORTED_MODULE_0__["default"])()}px`;
+      }
+    }, time);
+  }
+
+  bindModal('.button-order.button-design', '.popup-design', '.popup-design .popup-close');
+  bindModal('.button-order.button-consultation', '.popup-consultation', '.popup-consultation .popup-close');
+  showModalByTime('.popup-consultation', 3000);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (modals);
 
 /***/ })
 
