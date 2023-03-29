@@ -3,6 +3,7 @@ import sliders from "./modules/sliders";
 import forms from "./modules/forms";
 
 import showMoreStyles from "./modules/showMoreStyles";
+import calc from "./modules/calc";
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,5 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	forms();
 
 	showMoreStyles('.button-styles', '#styles .row');
+	calc('#size', '#material', '#options', '.promocode', '.calc-price');
 
 });
