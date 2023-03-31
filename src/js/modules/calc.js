@@ -1,4 +1,4 @@
-function calc(size, material, options, promocode, result) {
+function calc(size, material, options, promocode, result, state) {
 	
 	const sizeBlock = document.querySelector(size),
 		materialBlock = document.querySelector(material),
@@ -16,16 +16,43 @@ function calc(size, material, options, promocode, result) {
 		if (sizeBlock.value == '' || materialBlock.value == '') {
 			resultBlock.textContent = "Пожалуйста, выберите размер и материал картины";
 		} else if (promocodeBlock.value === 'IWANTPOPART') {
-			resultBlock.textContent = Math.round(sum * 0.7);
+			sum = Math.round(sum * 0.7);
+			resultBlock.textContent = sum
+			state.price = sum;
+			console.log(state);
 		} else {
 			resultBlock.textContent = sum;
+			state.price = sum;
+			console.log(state);
 		}
+		
 	};
 
-	sizeBlock.addEventListener('change', calcFunc);
-	materialBlock.addEventListener('change', calcFunc);
-	optionsBlock.addEventListener('change', calcFunc);
-	promocodeBlock.addEventListener('input', calcFunc);
+	sizeBlock.addEventListener('change', () => {
+		
+		state['size'] = sizeBlock.value;
+		calcFunc();
+		console.log(state);
+	});
+	materialBlock.addEventListener('change', () => {
+		
+		state['material'] = materialBlock.value;
+		calcFunc();
+	});
+	optionsBlock.addEventListener('change', () => {
+		
+		state['options'] = optionsBlock.value;
+		calcFunc();
+	});
+	promocodeBlock.addEventListener('input', ()=> {
+		calcFunc();
+		console.log(state);
+		
+		
+	});
+	
+	
+	
 
 }
 

@@ -1,6 +1,6 @@
 import { postData } from "../services/requests";
 
-function forms() {
+function forms(state) {
 	
 	const form = document.querySelectorAll('form'),
 		input = document.querySelectorAll('input'),
@@ -67,6 +67,12 @@ function forms() {
 
 			
 			const formData = new FormData(item);
+			if (item.closest('.popup-design')) {
+				for (let obj in state) {
+					formData.append(obj, state[obj]);
+				}
+				console.log(item);
+			}			
 			let api;
 			item.closest('.popup-design') || item.classList.contains('calc_form') ? api = path.designer : api = path.qustion;
 			

@@ -4,18 +4,21 @@ import forms from "./modules/forms";
 
 import showMoreStyles from "./modules/showMoreStyles";
 import calc from "./modules/calc";
-
+import filter from "./modules/filter";
 
 document.addEventListener('DOMContentLoaded', () => {
 	
 	'use strict'
 
+	let calcForm = {};
+
 	modals();
 	sliders('.feedback-slider-item', '', '.main-prev-btn', '.main-next-btn');
 	sliders('.main-slider-item', 'vertical');
-	forms();
+	forms(calcForm);
 
 	showMoreStyles('.button-styles', '#styles .row');
-	calc('#size', '#material', '#options', '.promocode', '.calc-price');
+	calc('#size', '#material', '#options', '.promocode', '.calc-price', calcForm);
+	filter();
 
 });
