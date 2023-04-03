@@ -6,6 +6,7 @@ import showMoreStyles from "./modules/showMoreStyles";
 import calc from "./modules/calc";
 import filter from "./modules/filter";
 import pictureSize from "./modules/pictureSize";
+import accordion from "./modules/accordion";
 
 document.addEventListener('DOMContentLoaded', () => {
 	
@@ -22,5 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	calc('#size', '#material', '#options', '.promocode', '.calc-price', calcForm);
 	filter();
 	pictureSize('.sizes-block');
+	accordion('.accordion-heading');
 
 });
