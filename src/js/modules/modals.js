@@ -11,7 +11,8 @@ const modals = () => {
 			close = document.querySelector(closeSelector),
 			windows = document.querySelectorAll('[data-modal]'),
 			scroll = calcScroll(),
-			present = document.querySelector('.fixed-gift');
+			present = document.querySelector('.fixed-gift'),
+			pageUp = document.querySelector('.pageup');
 		
 		
 		
@@ -37,6 +38,7 @@ const modals = () => {
 				document.body.style.overflow = 'hidden'
 				document.body.style.marginRight = `${scroll}px`
 				present.style.marginRight = `${scroll}px`
+				pageUp.style.marginRight = `${scroll}px`
 			});
 		});
 
@@ -52,6 +54,7 @@ const modals = () => {
 				document.body.style.overflow = ''
 				document.body.style.marginRight = `0px`
 				present.style.marginRight = `0px`
+				pageUp.style.marginRight = `0px`
 			}
 			
 		});
